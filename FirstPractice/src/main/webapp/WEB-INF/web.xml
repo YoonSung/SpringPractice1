@@ -6,6 +6,10 @@
 	
 	<display-name>FirstPractice</display-name>
 	
+	<welcome-file-list>
+		<welcome-file></welcome-file>
+	</welcome-file-list>
+	
 	<!-- The front controller of this Spring Web application, responsible for handling all application requests -->
 	<servlet>
 		<servlet-name>first</servlet-name>
