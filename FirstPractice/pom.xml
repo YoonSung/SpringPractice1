@@ -21,10 +21,13 @@
 				<version>2.1.1</version>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
+				<!-- <groupId>org.apache.maven.plugins</groupId> -->
 				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
 				<configuration>
 					<wtpversion>2.0</wtpversion>
+					<wtpContextName>ROOT</wtpContextName>
+					<downloadSources>true</downloadSources>
 				</configuration>
 			</plugin>
 		</plugins>
