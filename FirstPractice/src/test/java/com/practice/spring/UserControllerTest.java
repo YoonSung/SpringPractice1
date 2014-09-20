@@ -1,8 +1,9 @@
 package com.practice.spring;
 
-import static org.junit.Assert.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
@@ -28,7 +29,12 @@ public class UserControllerTest {
 	
 	@Test
 	public void create() throws Exception {
-		mockMvc.perform(post("/user"))
+		mockMvc.perform(post("/user")
+				.param("userId", "Yoonsung")
+				.param("password", "JungPassword")
+				.param("name", "정윤성")
+				.param("email", "estrella@nhnnext.org")
+		)
 			.andExpect(status().isFound())
 			.andExpect(redirectedUrl("/"));
 	}
