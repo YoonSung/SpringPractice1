@@ -9,15 +9,26 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+@RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
-
+	
 	MockMvc mockMvc;
+	
+	@Mock
+	UserDao userDao;
+	
+	@InjectMocks
+	UserController userController;
 	
 	@Before
 	public void setUp() {
-		mockMvc = standaloneSetup(new UserController()).build(); 
+		mockMvc = standaloneSetup(userController).build(); 
 	}
 	
 	@Test
