@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
@@ -48,7 +49,11 @@ public class UserDao extends JdbcDaoSupport {
 			}
 		};
 		
-		return getJdbcTemplate().queryForObject(sql, rowMapper, userId);
+		try {
+			return getJdbcTemplate().queryForObject(sql, rowMapper, userId);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 	
 }

@@ -19,9 +19,14 @@ public class UserDaoTest {
 	UserDao userDao;
 	
 	@Test
-	public void findById() {
+	public void findByIdWhenExistsId() {
 		User user = userDao.findById("Yoonsung");
 		assertEquals(user.getUserId(), "Yoonsung");
 	}
-
+	
+	@Test
+	public void findByIdWhenNotExistsId() {
+		User user = userDao.findById("Yoonssung");
+		assertNull(user);
+	}
 }
