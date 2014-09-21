@@ -6,12 +6,16 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
+	<properties>
+		<org.springframework.version>4.0.6.RELEASE.</org.springframework.version>
+	</properties>
+
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.0.6.RELEASE</version>
+			<version>${org.springframework.version}</version>
 		</dependency>
 
 		<!-- Servlet -->
@@ -39,7 +43,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>4.0.6.RELEASE</version>
+			<version>${org.springframework.version}</version>
 		</dependency>
 
 		<!-- Database -->
@@ -58,9 +62,9 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>4.0.6.RELEASE</version>
+			<version>${org.springframework.version}</version>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
