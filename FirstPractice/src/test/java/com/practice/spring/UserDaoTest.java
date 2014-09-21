@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -28,5 +29,18 @@ public class UserDaoTest {
 	public void findByIdWhenNotExistsId() {
 		User user = userDao.findById("Yoonssung");
 		assertNull(user);
+	}
+	
+	@Test
+	public void create() throws Exception {
+		
+		String userId = "JungYoonSung";
+		
+		User createdUser = new User(userId, "PassPass", "정윤성", "estrella@nhnnext.org");
+		int affectedRowNum = userDao.create(createdUser);
+		assertEquals(affectedRowNum, 1);
+		
+		User userFromDatabase = userDao.findById(userId);
+		assertEquals(createdUser, userFromDatabase);
 	}
 }

@@ -55,5 +55,11 @@ public class UserDao extends JdbcDaoSupport {
 			return null;
 		}
 	}
+
+
+	public int create(User user) {
+		String sql = "INSERT INTO tbl_user (userId, password, name, email) VALUES (?, ?, ?, ?)";
+		return getJdbcTemplate().update(sql, user.getUserId(), user.getPassword(), user.getName(), user.getEmail());
+	}
 	
 }
