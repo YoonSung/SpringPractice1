@@ -14,5 +14,9 @@
 		p:username="${database.usermame}"
 		p:password="${database.password}" 
 	/>
+	
+	<bean id="userDao" class="com.practice.spring.UserDao"
+		p:dataSource-ref="dataSource"
+	/>
 		
 </beans>
