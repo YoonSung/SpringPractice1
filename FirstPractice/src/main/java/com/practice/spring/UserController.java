@@ -89,7 +89,18 @@ public class UserController {
 	}
 	
 	@RequestMapping("/user/{userId}/form")
-	public String modifyForm(@PathVariable String userId) {
+	public String modifyForm(@PathVariable String userId, Model model, HttpSession session) {
+		
+		//TODO Check Parameter And Session (Is Same Data)
+		//if (sessionObject == null)
+		
+		Object sessionObject = session.getAttribute("userId");
+		String userIdFromSession = sessionObject.toString(); 
+		
+		//TODO Get User Data From Database, And Check with parameter userId and session userId is same
+		
+		User userFromDatabase = userDao.findById(userId);
+		model.addAttribute("user", userFromDatabase);
 		return "/users/form";
 	}
 }
