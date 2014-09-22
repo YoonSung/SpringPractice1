@@ -47,4 +47,10 @@ public class UserController {
 		
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/user/login/form")
+	public String loginForm(Model model) {
+		model.addAttribute("authentication", new Authentication());
+		return "/users/login";
+	}
 }
