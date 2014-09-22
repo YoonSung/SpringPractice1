@@ -55,15 +55,20 @@ public class UserControllerTest {
 	public void loginForm() throws Exception {
 		mockMvc.perform(get("/user/login/form"))
 			.andExpect(status().isOk())
+			.andExpect(model().size(1))
+			.andExpect(model().attribute("authentication", new Authentication()))
 			.andExpect(forwardedUrl("/users/login"));
 	}
 	
+	
+	//Validation Error Check
 	@Test
-	public void login() throws Exception {
+	public void loginWithNoParam() throws Exception {
 		mockMvc.perform(post("/user/login"))
 			.andDo(print())
+			.andExpect(status().isOk())
 			.andExpect(model().size(1))
-			.andExpect(model().attributeExists("errorMessage"))
-			.andExpect(redirectedUrl("/"));
+			.andExpect(model().attributeExists("authentication"))
+			.andExpect(forwardedUrl("/users/login/form"));
 	}
 }
