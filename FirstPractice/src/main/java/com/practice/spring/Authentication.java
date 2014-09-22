@@ -67,4 +67,8 @@ public class Authentication {
 			return false;
 		return true;
 	}
+
+	public boolean isSamePassword(String originPassword) {
+		return this.password.equalsIgnoreCase(originPassword);
+	}
 }

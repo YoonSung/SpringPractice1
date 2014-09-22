@@ -110,4 +110,8 @@ public class User {
 			return false;
 		return true;
 	}
+
+	public boolean isSamePassword(Authentication authentication) {
+		return authentication.isSamePassword(password);
+	}
 }

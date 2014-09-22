@@ -56,8 +56,7 @@ public class UserController {
 	
 	@RequestMapping(value="/user/login", method=RequestMethod.POST)
 	public String loginForm(@Valid Authentication authentication, BindingResult bidingResult, Model model) {
-		log.info("{}",bidingResult.getErrorCount());
-		//TODO Validation Error
+
 		if (bidingResult.getErrorCount() > 0) {
 			for (ObjectError error: bidingResult.getAllErrors()) {
 				log.error("Validation Error : {}", error.getDefaultMessage());
@@ -65,12 +64,18 @@ public class UserController {
 			return "/users/login/form";
 		}
 		
-		//TODO 아이디가 존재하지 않을경우
+		User user = userDao.findById(authentication.getUserId());
 		
+		if (user == null) {
+			model.addAttribute("errorMessage", "아이디가 존재하지 않습니다.");
+			return "/users/login/form";
+		}
 		
-		//TODO 비밀번호가 다를경우
+		if (!user.isSamePassword(authentication)) {
+			model.addAttribute("errorMessage", "비밀번호가 존재하지 않습니다.");
+			return "/users/login/form";
+		}
 		
-		//TODO 정상로그인의 경우
 		return "redirect:/";
 	}
 }
