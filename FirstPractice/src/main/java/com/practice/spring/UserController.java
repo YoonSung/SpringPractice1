@@ -61,19 +61,19 @@ public class UserController {
 			for (ObjectError error: bidingResult.getAllErrors()) {
 				log.error("Validation Error : {}", error.getDefaultMessage());
 			}
-			return "/users/login/form";
+			return "/users/login";
 		}
 		
 		User user = userDao.findById(authentication.getUserId());
 		
 		if (user == null) {
 			model.addAttribute("errorMessage", "아이디가 존재하지 않습니다.");
-			return "/users/login/form";
+			return "/users/login";
 		}
 		
 		if (!user.isSamePassword(authentication)) {
 			model.addAttribute("errorMessage", "비밀번호가 존재하지 않습니다.");
-			return "/users/login/form";
+			return "/users/login";
 		}
 		
 		return "redirect:/";
