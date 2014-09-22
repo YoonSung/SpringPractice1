@@ -12,25 +12,30 @@
 </head>
 <body>
 	<%@ include file="../commons/_top.jspf"%>
-
+	<c:choose>
+		<c:when test="${not empty sessionScope.userId}">
+			<c:set var="title" value="개인정보 수정" />
+			<c:set var="method" value="put" />	
+		</c:when>
+		
+		<c:otherwise>
+			<c:set var="title" value="회원가입" />
+			<c:set var="method" value="post" />
+		</c:otherwise>
+	</c:choose>	
+	
+	
 	<div class="container">
 		<div class="row">
 			<div class="span12">
 				<section id="typography">
 				<div class="page-header">
-					<c:choose>
-						<c:when test="${not empty sessionScope.userId}">
-							<h1>개인정보 수정</h1>
-						</c:when>
-						<c:otherwise>
-							<h1>회원가입</h1>
-						</c:otherwise>
-					</c:choose>
+					<h1><c:out value="${title}"/></h1>
 				</div>
 
 
 				<springForm:form modelAttribute="user" cssClass="form-horizontal"
-					action="/user" method="post">
+					action="/user" method="${method}">
 					<div class="control-group">
 						<label class="control-label" for="userId">사용자 아이디</label>
 						<div class="controls">
@@ -69,14 +74,7 @@
 					</div>
 					<div class="control-group">
 						<div class="controls">
-							<c:choose>
-								<c:when test="${not empty sessionScope.userId}">
-									<button type="submit" class="btn btn-primary">수정</button>
-								</c:when>
-								<c:otherwise>
-									<button type="submit" class="btn btn-primary">회원가입</button>
-								</c:otherwise>
-							</c:choose>
+							<button type="submit" class="btn btn-primary" >${title}</button>
 						</div>
 					</div>
 				</springForm:form>

@@ -57,7 +57,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/user/login", method=RequestMethod.POST)
-	public String loginForm(@Valid Authentication authentication, BindingResult bidingResult, Model model, HttpSession session) {
+	public String login(@Valid Authentication authentication, BindingResult bidingResult, Model model, HttpSession session) {
 
 		if (bidingResult.getErrorCount() > 0) {
 			for (ObjectError error: bidingResult.getAllErrors()) {
@@ -102,5 +102,21 @@ public class UserController {
 		User userFromDatabase = userDao.findById(userId);
 		model.addAttribute("user", userFromDatabase);
 		return "/users/form";
+	}
+	
+	@RequestMapping(value="/user", method=RequestMethod.PUT)
+	public String modify(@Valid User user, BindingResult bindingResult) {
+		
+		if (bindingResult.getErrorCount() != 0) {
+			for (ObjectError error : bindingResult.getAllErrors()) {
+				log.error("Register User Error, field : {}, error : {}", error.getArguments() , error.getDefaultMessage());
+			}
+			return "/users/form";
+		}
+		
+		//TODO  check database 
+		userDao.update(user);
+		
+		return "redirect:/";
 	}
 }
