@@ -1,5 +1,6 @@
 package com.practice.spring;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -55,7 +56,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/user/login", method=RequestMethod.POST)
-	public String loginForm(@Valid Authentication authentication, BindingResult bidingResult, Model model) {
+	public String loginForm(@Valid Authentication authentication, BindingResult bidingResult, Model model, HttpSession session) {
 
 		if (bidingResult.getErrorCount() > 0) {
 			for (ObjectError error: bidingResult.getAllErrors()) {
@@ -76,6 +77,7 @@ public class UserController {
 			return "/users/login";
 		}
 		
+		session.setAttribute("userId", user.getUserId());
 		return "redirect:/";
 	}
 }
