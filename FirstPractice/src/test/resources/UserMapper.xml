@@ -6,4 +6,8 @@
   <select id="findById" resultType="com.practice.spring.User">
     SELECT * FROM tbl_user where userId = #{userId}
   </select>
+  
+  <insert id="create" parameterType="com.practice.spring.User">
+  	INSERT INTO tbl_user(userId, password, name, email) VALUES(#{userId}, #{password}, #{name}, #{email})
+  </insert>
 </mapper>
