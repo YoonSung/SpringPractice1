@@ -1,4 +1,4 @@
-package com.practice.spring;
+package com.practice.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +13,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+
+import com.practice.domain.User;
 
 
 public class UserDao extends JdbcDaoSupport {

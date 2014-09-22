@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import com.practice.spring.User;
+import com.practice.domain.User;
 
 public class MybatisTest {
 	

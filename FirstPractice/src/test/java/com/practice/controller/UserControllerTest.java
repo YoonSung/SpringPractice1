@@ -1,4 +1,4 @@
-package com.practice.spring;
+package com.practice.controller;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -18,6 +18,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import com.practice.controller.UserController;
+import com.practice.dao.UserDao;
+import com.practice.domain.Authentication;
+import com.practice.domain.User;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;

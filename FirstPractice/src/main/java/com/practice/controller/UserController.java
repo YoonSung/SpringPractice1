@@ -1,4 +1,4 @@
-package com.practice.spring;
+package com.practice.controller;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -13,6 +13,10 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.practice.dao.UserDao;
+import com.practice.domain.Authentication;
+import com.practice.domain.User;
 
 @Controller
 public class UserController {

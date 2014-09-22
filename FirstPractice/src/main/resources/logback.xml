@@ -9,7 +9,7 @@
 			</pattern>
 		</encoder>
 	</appender>
-	<logger name="com.practice.spring" level="INFO" />
+	<logger name="com.practice" level="INFO" />
 	
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />

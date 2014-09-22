@@ -3,11 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserMapper">
-  <select id="findById" resultType="com.practice.spring.User">
+  <select id="findById" resultType="com.practice.domain.User">
     SELECT * FROM tbl_user where userId = #{userId}
   </select>
   
-  <insert id="create" parameterType="com.practice.spring.User">
+  <insert id="create" parameterType="com.practice.domain.User">
   	INSERT INTO tbl_user(userId, password, name, email) VALUES(#{userId}, #{password}, #{name}, #{email})
   </insert>
 </mapper>
