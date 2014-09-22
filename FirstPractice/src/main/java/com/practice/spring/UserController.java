@@ -80,4 +80,10 @@ public class UserController {
 		session.setAttribute("userId", user.getUserId());
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/user/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("userId");
+		return "redirect:/";
+	}
 }
