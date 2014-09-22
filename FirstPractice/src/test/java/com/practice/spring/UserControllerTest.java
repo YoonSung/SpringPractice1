@@ -4,10 +4,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 import org.junit.Before;
@@ -16,14 +13,19 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
 	
 	MockMvc mockMvc;
-	
-	User user;
 	
 	@Mock
 	UserDao userDao;
@@ -94,7 +96,7 @@ public class UserControllerTest {
 	@Test
 	public void loginWithMissPassword() throws Exception {
 		
-		user = new User("Yoonsung", "Password", "JungYoonSung", "estrella@nhnnext.org");
+		User user = new User("Yoonsung", "Password", "JungYoonSung", "estrella@nhnnext.org");
 		when(userDao.findById(user.getUserId())).thenReturn(user);
 		
 		mockMvc.perform(post("/user/login")
@@ -113,17 +115,40 @@ public class UserControllerTest {
 	@Test
 	public void loginWithValidUser() throws Exception {
 		
-		user = new User("Yoonsung", "Password", "JungYoonSung", "estrella@nhnnext.org");
+		User user = new User("Yoonsung", "Password", "JungYoonSung", "estrella@nhnnext.org");
 		when(userDao.findById(user.getUserId())).thenReturn(user);
 		
 		mockMvc.perform(post("/user/login")
 				.param("userId", user.getUserId())
 				.param("password", user.getPassword())
 		)
-			.andDo(print())
+			//.andDo(print())
 			.andExpect(status().isMovedTemporarily())
 			.andExpect(model().size(1))
 			.andExpect(model().attributeExists("authentication"))
 			.andExpect(redirectedUrl("/"));
+	}
+	
+	@Test
+	public void logout() throws Exception {
+		User user = new User("Yoonsung", "Password", "JungYoonSung", "estrella@nhnnext.org");
+		when(userDao.findById(user.getUserId())).thenReturn(user);
+		
+		ResultActions auth =this.mockMvc.perform(post("/user/login")
+				.param("userId", user.getUserId())
+				.param("password", user.getPassword())
+		 );
+		
+		MvcResult result = auth.andReturn();
+		MockHttpSession session = (MockHttpSession)result.getRequest().getSession();
+		
+		
+		ResultActions actions = mockMvc.perform(get("/user/logout").session(session))
+			.andExpect(status().isMovedTemporarily());
+			//.andExpect(MockMvcResultMatchers.s.sessionAttribute("userId", null));
+		
+		MockHttpSession session2 = (MockHttpSession)actions.andReturn().getRequest().getSession();
+		assertEquals(session2.getAttribute("userId"), null);
+
 	}
 }
