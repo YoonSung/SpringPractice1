@@ -73,7 +73,7 @@ public class UserControllerTest {
 			.andExpect(status().isOk())
 			.andExpect(model().size(1))
 			.andExpect(model().attributeExists("authentication"))
-			.andExpect(forwardedUrl("/users/login/form"));
+			.andExpect(forwardedUrl("/users/login"));
 	}
 	
 	@Test
@@ -88,7 +88,7 @@ public class UserControllerTest {
 			.andExpect(model().attributeExists("authentication"))
 			.andExpect(model().attributeExists("errorMessage"))
 			.andExpect(model().attribute("errorMessage", "아이디가 존재하지 않습니다."))
-			.andExpect(forwardedUrl("/users/login/form"));
+			.andExpect(forwardedUrl("/users/login"));
 	}
 	
 	@Test
@@ -107,7 +107,7 @@ public class UserControllerTest {
 			.andExpect(model().attributeExists("authentication"))
 			.andExpect(model().attributeExists("errorMessage"))
 			.andExpect(model().attribute("errorMessage", "비밀번호가 존재하지 않습니다."))
-			.andExpect(forwardedUrl("/users/login/form"));
+			.andExpect(forwardedUrl("/users/login"));
 	}
 	
 	@Test
