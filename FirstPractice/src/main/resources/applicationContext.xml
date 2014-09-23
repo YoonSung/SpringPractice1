@@ -12,7 +12,6 @@
 		p:username="${database.usermame}" p:password="${database.password}" />
 
 	<bean id="userDao" class="com.practice.dao.MybatisUserDao">
-		<property name="dataSource" ref="dataSource" />
 		<property name="sqlSession" ref="sqlSession" />
 	</bean>
 	

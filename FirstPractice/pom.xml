@@ -8,6 +8,7 @@
 
 	<properties>
 		<org.springframework.version>4.0.6.RELEASE</org.springframework.version>
+		<com.h2database.version>1.4.181</com.h2database.version>
 	</properties>
 
 	<dependencies>
@@ -75,7 +76,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.4.181</version>
+			<version>${com.h2database.version}</version>
 		</dependency>
 
 		<dependency>
@@ -151,6 +152,23 @@
 					<target>1.7</target>
 					<encoding>utf-8</encoding>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<url>jdbc:h2:~/SpringPractice</url>
+					<user>yoon</user>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.h2database</groupId>
+						<artifactId>h2</artifactId>
+						<version>${com.h2database.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
