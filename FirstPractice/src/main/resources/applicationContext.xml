@@ -9,22 +9,13 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 	<context:property-placeholder location="classpath:/application-properties.xml" />
+	<context:component-scan base-package="com.practice.dao" />
 	<tx:annotation-driven/>
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		p:driverClassName="${database.driverClassName}" p:url="${database.url}"
 		p:username="${database.usermame}" p:password="${database.password}" />
 
-	<bean id="userDao" class="com.practice.dao.MybatisUserDao">
-		<property name="sqlSession" ref="sqlSession" />
-	</bean>
-	
-	<!-- 
-	<bean id="userDao" class="com.practice.dao.JdbcUserDao">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
- 	-->
- 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:/mybatis-config.xml" />
