@@ -14,7 +14,7 @@ import com.practice.domain.User;
 
 public class MybatisUserDao implements UserDao{
 
-	private static final Logger log = LoggerFactory.getLogger(JdbcUserDao.class);
+	private static final Logger log = LoggerFactory.getLogger(MybatisUserDao.class);
 	
 	//TODO DELETE
 	//TODO SET AUTOWIRED

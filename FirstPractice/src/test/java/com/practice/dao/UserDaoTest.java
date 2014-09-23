@@ -13,7 +13,7 @@ import com.practice.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/applicationContext.xml")
-public class MybatisUserDaoTest {
+public class UserDaoTest {
 	
 	@Autowired
 	UserDao userDao;
