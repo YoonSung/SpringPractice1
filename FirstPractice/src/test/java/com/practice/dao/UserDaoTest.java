@@ -8,11 +8,15 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.practice.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/applicationContext.xml")
+@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=true)
+@Transactional
 public class UserDaoTest {
 	
 	@Autowired
@@ -33,7 +37,7 @@ public class UserDaoTest {
 	@Test
 	public void create() throws Exception {
 		
-		String userId = "JungYoonSung";
+		String userId = "YoonSung10";
 		
 		User createdUser = new User(userId, "PassPass", "정윤성", "estrella@nhnnext.org");
 		int affectedRowNum = userDao.create(createdUser);
