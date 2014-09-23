@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -12,16 +13,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration("classpath:/applicationContext.xml")
 public class MybatisUserDaoTest {
 
+	@Autowired
 	private SqlSession sqlSession;
-	
-	public void setSqlSession(SqlSession sqlSession) {
-		this.sqlSession = sqlSession;
-	}
 	
 	@Test
 	public void gettingStart() {
-		//assertNotNull(sqlSession);
-		System.out.println(sqlSession);
+		assertNotNull(sqlSession);
 	}
 
 }
