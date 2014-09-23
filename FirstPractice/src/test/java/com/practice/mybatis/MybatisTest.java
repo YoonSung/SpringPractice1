@@ -1,6 +1,7 @@
 package com.practice.mybatis;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
@@ -16,9 +17,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
 
 import com.practice.domain.User;
 
@@ -61,6 +59,29 @@ public class MybatisTest {
 		
 		User selectUser = sqlSession.selectOne("UserMapper.findById", "Yoonsung2");
 		assertEquals(createdUser, selectUser);
+	}
+	
+	@Test
+	public void update() throws Exception {
+		
+		String userId = "Yoonsung3";
+		
+		User user = new User(userId, "PassPass", "YoonSungJung", "asdf@naver.com");
+		int createdRow = sqlSession.insert("UserMapper.create", user);
+		assertThat(createdRow, is(1));
+		
+		String newPassword = "password";
+		String newName = "JungYoonSung";
+		String newEmail = "lvev9925@naver.com";
+		
+		User updateUser = new User(userId, newPassword, newName, newEmail);
+		int updatedRow = sqlSession.update("UserMapper.update", updateUser);
+		assertThat(updatedRow, is(1));
+		
+		User selectUser = sqlSession.selectOne("UserMapper.findById", userId);
+		assertEquals(newPassword, selectUser.getPassword());
+		assertEquals(newName, selectUser.getName());
+		assertEquals(newEmail, selectUser.getEmail());
 	}
 	
 }

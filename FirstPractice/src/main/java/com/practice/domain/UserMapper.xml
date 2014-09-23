@@ -10,4 +10,8 @@
   <insert id="create" parameterType="User">
   	INSERT INTO tbl_user(userId, password, name, email) VALUES(#{userId}, #{password}, #{name}, #{email})
   </insert>
+  
+  <update id="update" parameterType="User">
+  	UPDATE tbl_user SET password=#{password}, name=#{name}, email=#{email} WHERE userId=#{userId}
+  </update>
 </mapper>

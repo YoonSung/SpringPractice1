@@ -11,20 +11,25 @@
 		p:driverClassName="${database.driverClassName}" p:url="${database.url}"
 		p:username="${database.usermame}" p:password="${database.password}" />
 
-	<bean id="userDao" class="com.practice.dao.UserDao"
-		p:dataSource-ref="dataSource" />
-
+	<bean id="userDao" class="com.practice.dao.MybatisUserDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+	
+	<!-- 
+	<bean id="userDao" class="com.practice.dao.JdbcUserDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+ 	-->
+ 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath*:sample/config/mappers/**/*.xml" />
+		<property name="mapperLocations" value="classpath*:com/practice/domain/**/*.xml" />
 		<property name="typeAliasesPackage" value="com.practice.domain" />
 	</bean>
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
-	
-	<bean id="mybatisUserDao" class="com.practice.dao.MybatisUserDao"
-		p:sqlSession-ref="sqlSession"/>
-		
+
 </beans>
